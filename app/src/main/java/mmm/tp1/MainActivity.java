@@ -5,6 +5,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -50,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.telephone:
                 menuItemTelephone();
                 return true;
+            case R.id.browser:
+                menuItemBrowser();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -79,7 +84,12 @@ public class MainActivity extends AppCompatActivity {
         telephone.setInputType(InputType.TYPE_CLASS_PHONE);
 
         layout.addView(telephone);
-
-
     }
+
+    public void menuItemBrowser() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://fr.wikipedia.org/wiki/" + binding.spinner.getSelectedItem().toString()));
+        startActivity(intent);
+    }
+
+
 }
