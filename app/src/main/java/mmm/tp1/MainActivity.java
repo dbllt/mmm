@@ -21,7 +21,14 @@ import mmm.tp1.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_NOM = "mmm.tp1.nom";
+    public static final String EXTRA_PRENOM = "mmm.tp1.prenom";
+    public static final String EXTRA_DATE = "mmm.tp1.date";
+    public static final String EXTRA_VILLE = "mmm.tp1.ville";
     private ActivityMainBinding binding;
+
+
+    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +69,35 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickValider(View view) {
-        String s = "Nom : " + binding.nom.getText() + "\nPrénom : " + binding.prenom.getText() +
-                "\nDate de naissance : " + binding.dateNaissance.getText() +
-                "\nVille de naissance : " + binding.villeNaissance.getText();
-        Toast.makeText(getApplicationContext(),
-                s, Toast.LENGTH_SHORT).show();
+        /**
+         Intent intent = new Intent(this, SecondActivity.class);
+         intent.putExtra(EXTRA_NOM, binding.nom.getText());
+         intent.putExtra(EXTRA_PRENOM, binding.prenom.getText());
+         intent.putExtra(EXTRA_DATE, binding.dateNaissance.getText());
+         intent.putExtra(EXTRA_VILLE, binding.villeNaissance.getText());
+         startActivity(intent);
+         **/
+        Intent intent = new Intent(this, SecondActivity.class);
+
+        EditText nom = (EditText) findViewById(R.id.nom);
+        String messageNom = nom.getText().toString();
+        intent.putExtra(EXTRA_NOM, messageNom);
+
+        EditText prenom = (EditText) findViewById(R.id.prenom);
+        String messagePrenom = prenom.getText().toString();
+        intent.putExtra(EXTRA_PRENOM, messagePrenom);
+
+        EditText date = (EditText) findViewById(R.id.dateNaissance);
+        String messageDate = date.getText().toString();
+        intent.putExtra(EXTRA_DATE, messageDate);
+
+        EditText ville = (EditText) findViewById(R.id.villeNaissance);
+        String messageVille = ville.getText().toString();
+        intent.putExtra(EXTRA_VILLE, messageVille);
+
+        startActivity(intent);
+
+
     }
 
     public void menuItemClear() {
