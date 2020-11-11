@@ -1,4 +1,4 @@
-package mmm.tp1;
+package mmm.mmm;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,10 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -20,11 +20,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.List;
+import java.util.Observer;
+
 
 public class MainFragment extends Fragment {
 
 
     private SharedInfoVM myData;
+
 
     private OnFragment1InteractionListener mListener;
 
@@ -36,6 +40,8 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setHasOptionsMenu(true);
     }
 
@@ -110,7 +116,7 @@ public class MainFragment extends Fragment {
         if (mListener != null) {
             User user = new User(nom, prenom, date, ville);
             myData.setdata(user);
-            ((MainActivity) getActivity()).userList.add(user);
+            ((MainActivity) getActivity()).viewModel.insert(user);
 
             mListener.onFragment1Interaction();
         }

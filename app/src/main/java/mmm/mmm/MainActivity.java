@@ -1,33 +1,25 @@
-package mmm.tp1;
+package mmm.mmm;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
-import mmm.tp1.databinding.ActivityMainBinding;
+import mmm.mmm.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnFragment1InteractionListener, SecondFragment.OnFragment2InteractionListener, NewFragment.OnNewFragmentInteractionListener {
 
-    public List<User> userList;
 
+    public ViewModel viewModel;
     private NavController navController;
 
     @Override
@@ -35,9 +27,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         super.onCreate(savedInstanceState);
 
 
-        userList = new ArrayList<>();
-        userList.add(new User("Dupont", "Jean", "01/01/01", "Rennes"));
-        userList.add(new User("Dupond", "Pierre", "02/02/02", "Paris"));
+        viewModel = new ViewModelProvider.AndroidViewModelFactory(getApplication()).create(ViewModel.class);
+
+
+
         setContentView(R.layout.activity_main);
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);

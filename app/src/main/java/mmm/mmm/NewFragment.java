@@ -1,8 +1,9 @@
-package mmm.tp1;
+package mmm.mmm;
 
 import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.Observer;
 
 public class NewFragment extends Fragment implements UserAdapter.UserAdapterListener {
 
@@ -43,10 +45,18 @@ public class NewFragment extends Fragment implements UserAdapter.UserAdapterList
 
 
         recyclerView = v.findViewById(R.id.recyclerView);
-        mAdapter = new UserAdapter(getActivity(), ((MainActivity) getActivity()).userList, this);
+        final UserAdapter mAdapter = new UserAdapter();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
+
+
+        ((MainActivity) getActivity()).viewModel.getAllUsers().observe(getActivity(), new Observer<List<User>>() {
+            @Override
+            public void onChanged(@Nullable List<User> users) {
+                mAdapter.setUsers(users);
+            }
+        });
 
         return v;
     }
