@@ -19,16 +19,25 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mmm.tp1.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity implements MainFragment.OnFragment1InteractionListener, SecondFragment.OnFragment2InteractionListener {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnFragment1InteractionListener, SecondFragment.OnFragment2InteractionListener, NewFragment.OnNewFragmentInteractionListener {
 
+    public List<User> userList;
 
     private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        userList = new ArrayList<>();
+        userList.add(new User("Dupont", "Jean", "01/01/01", "Rennes"));
+        userList.add(new User("Dupond", "Pierre", "02/02/02", "Paris"));
         setContentView(R.layout.activity_main);
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -59,4 +68,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
     }
 
 
+    @Override
+    public void onNewFragmentInteraction() {
+
+
+        navController.navigate(R.id.action_newFragment_to_mainFragment);
+    }
 }

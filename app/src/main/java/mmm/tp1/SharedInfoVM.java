@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SharedInfoVM extends ViewModel {
-    private final MutableLiveData<UserInfo> data = new MutableLiveData<UserInfo>();
+    private final MutableLiveData<User> data = new MutableLiveData<User>();
 
-    public void setdata(UserInfo newdata) {
+    public void setdata(User newdata) {
         data.setValue(newdata);
     }
 
-    public LiveData<UserInfo> getData() {
+    public LiveData<User> getData() {
         return data;
     }
 }
